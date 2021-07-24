@@ -49,6 +49,12 @@ public class LoginTests extends TestBase {
         Assert.assertEquals(loginPage.getErrorMessage(),"There isn't an account for this email",
                 "The error message is not correct");
     }
+
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "negativeLogin1")
+    public void negativeLogin1(String login, String password, String message)  {
+        loginPage.loginNotAttl1(login, password, message);
+
+    }
 }
 
 

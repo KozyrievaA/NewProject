@@ -27,6 +27,22 @@ public class DataProviders {
         in.close();
         return userData.iterator();
     }
+    @DataProvider
+    public static Iterator<Object[]> negativeLogin1() throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                DataProviders.class
+                        .getResourceAsStream("/loginNegative1.data")));
+
+        List<Object[]> userData = new ArrayList<>();
+        String line = in.readLine();
+        while (line != null) {
+            userData.add(line.split(";"));
+            line = in.readLine();
+        }
+        in.close();
+        return userData.iterator();
+    }
+
 
     @DataProvider
     public static Iterator<Object[]> newListCreating() throws IOException {
@@ -56,7 +72,6 @@ public class DataProviders {
         return data.iterator();
     }
 
-
     @DataProvider
     public Iterator<Object[]> dataProviderThird() {
         List<Object[]> data = new ArrayList();
@@ -77,7 +92,6 @@ public class DataProviders {
 
         return "pass" + (new Random()).nextInt();
     }
-
 
 }
 
