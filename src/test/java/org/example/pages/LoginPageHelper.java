@@ -41,7 +41,7 @@ public class LoginPageHelper extends PageBase {
         fillInPasswordField(password);
         submitLoginNotAttl();
     }
-    public void loginNotAttl1(String login, String password, String message) {
+    public void loginNotAttl1(String login, String password) {
         fillInUserField(login);
         fillInPasswordField(password);
         submitLoginNotAttl();

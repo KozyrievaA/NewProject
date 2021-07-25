@@ -2,6 +2,7 @@ package org.example.tests;
 
 import org.example.pages.*;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -43,15 +44,21 @@ public class HelpWindowTest extends TestBase {
 
     @Test
     public void windowHandleTest() throws InterruptedException {
+        String firstWindow = driver.getWindowHandle();
+        String secondWindow = driver.getWindowHandle();
         helpPage.switchToSecondWindow();
         helpPage.closeWindow();
+        Assert.assertEquals(firstWindow,secondWindow);
     }
 
     @Test
     public void windowHandleTest2() throws InterruptedException {
         helpPage.switchToSecondWindow();
+        String firstWindow=driver.getWindowHandle();
         helpPage.goToYourBoardsButton();
-        System.out.println("Active 'Go to your boards' window handle: " + driver.getWindowHandle());
+        String secondWindow =driver.getWindowHandle();
+        //System.out.println("Active 'Go to your boards' window handle: " + driver.getWindowHandle());
+        Assert.assertEquals(firstWindow,secondWindow);
 
     }
 }

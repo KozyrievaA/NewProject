@@ -52,7 +52,9 @@ public class LoginTests extends TestBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "negativeLogin1")
     public void negativeLogin1(String login, String password, String message)  {
-        loginPage.loginNotAttl1(login, password, message);
+        loginPage.loginNotAttl1(login, password);
+        Assert.assertEquals(loginPage.getErrorMessage(), message,
+                "There isn't an account for this user");
 
     }
 }
