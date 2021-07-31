@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.example.tests.TestBase.log4j;
+
 public class LoginPageHelper extends PageBase {
     @FindBy(css = ".text-primary")
     WebElement logInIcon;
@@ -25,14 +27,19 @@ public class LoginPageHelper extends PageBase {
     }
 
     public LoginPageHelper openPage() {
+        log4j.startMethod("LoginPageHelper - openPage()");
+        log4j.info("wait until loginIcon button is clickable and click on it");
         waitUntilElementIsClickable(logInIcon, 15);
         logInIcon.click();
+        log4j.endMethod("LoginPageHelper - openPage()");
         return this;
     }
 
     public LoginPageHelper waitUntilPageIsLoaded() {
-
+        log4j.startMethod("LoginPageHelper - waitUntilPageIsLoaded()");
+        log4j.info("Wait until 'login' button is clickable");
         waitUntilElementIsClickable(loginButton, 10);
+        log4j.endMethod("LoginPageHelper - waitUntilPageIsLoaded()");
         return this;
     }
 
@@ -56,7 +63,11 @@ public class LoginPageHelper extends PageBase {
     }
 
     public String getErrorMessage(){
+        log4j.startMethod("LoginPageHelper - getErrorMessage()");
+        log4j.info("wait until error message is visible");
         waitUntilElementIsVisible(errorMessage, 10);
+        log4j.endMethod("LoginPageHelper - getErrorMessage()");
+        log4j.info("return error message");
         return errorMessage.getText();
 
     }

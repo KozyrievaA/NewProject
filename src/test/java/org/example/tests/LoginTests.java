@@ -22,6 +22,7 @@ public class LoginTests extends TestBase {
         homePage.waitUntilPageIsLoaded();
         loginPage.openPage();
         loginPage.waitUntilPageIsLoaded();
+        log4j.endMethod("LoginTests - initTests()");
 
     }
 
@@ -52,10 +53,14 @@ public class LoginTests extends TestBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "negativeLogin1")
     public void negativeLogin1(String login, String password, String message)  {
-        loginPage.loginNotAttl1(login, password);
+        log4j.startTestCase("negativeLogin1(), parameters: login="
+                + login + " password=" + password + " message='" + message + "'");
+        log4j.info("Enter login not attl: login=" + login + " password=" + password);
+        loginPage.loginNotAttl(login,password);
+        log4j.info("Assert: Message has to be - " + message);
         Assert.assertEquals(loginPage.getErrorMessage(), message,
-                "There isn't an account for this user");
-
+                "The error message is not correct");
+        log4j.endTestCase2();
     }
 }
 
