@@ -69,7 +69,7 @@ public class TestBase {
     log4j.info("see screen, " + screen);
   }
 
-  @BeforeSuite
+  @BeforeSuite(alwaysRun = true)
   public void initTestSuite() throws IOException {
     SuiteConfiguration config = new SuiteConfiguration();
     baseUrl = config.getProperty("site.url");
@@ -79,12 +79,12 @@ public class TestBase {
     capabilities = config.getCapabilities();
   }
 
-  @BeforeMethod
+  @BeforeMethod(alwaysRun = true)
   public void initWebDriver() {
     ChromeOptions options = new ChromeOptions();
-
-    driver = new EventFiringWebDriver(new ChromeDriver(options));
     options.addArguments("lang=" + "en");
+    driver = new EventFiringWebDriver(new ChromeDriver(options));
+
     //driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
     driver.register(new MyListener());
     driver.get(baseUrl);
@@ -93,7 +93,7 @@ public class TestBase {
     homePage.waitUntilPageIsLoaded();
   }
 
-  @AfterMethod
+ @AfterMethod(alwaysRun = true)
   public void finishTest(ITestResult result){
     if (result.getStatus()==ITestResult.FAILURE)
     {
@@ -104,6 +104,6 @@ public class TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() {
-    WebDriverPool.DEFAULT.dismissAll();
+      driver.quit();
   }
 }
